@@ -33,7 +33,7 @@ pipeline {
             }
             stage( 'Build docker image') {
                 steps {
-                    sh 'docker build -t helloworld:gradle .'
+                    sh 'docker build -t helloworld:latest .'
                     
                 }
                 
@@ -41,8 +41,8 @@ pipeline {
             stage('Upload Image to ACR') {
                 steps{
                     sh 'docker login http://$registryUrl -u ibmpoccontainer -p U7/tPnyIHnva=iNhTVPC32kgHsCSo07P'
-                    sh 'docker tag myimage ibmpoccontainer.azurecr.io/myimage:latest'
-                    sh 'docker push ibmpoccontainer.azurecr.io/myimage:latest'
+                    sh 'docker tag myimage ibmpoccontainer.azurecr.io/helloworld:latest'
+                    sh 'docker push ibmpoccontainer.azurecr.io/helloworld:latest'
                     
                 }
             }
