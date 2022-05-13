@@ -1,25 +1,50 @@
 pipeline {
-     agent any
-     stages {
-         stage('Clean Workspace') {
-             steps {
-                  deleteDir()                  
-             }
-         }
-         stage('Clone Project') {
-             steps {                  
-                  checkout scm                  
-             }
-         }
-         stage('Build') {
-             steps {                  
-                  sh './gradlew clean build'
-             }              
-             post {
-                 always {
-                     jiraSendBuildInfo site: 'bashsquad.atlassian.net'
-                 }
-             }
-         }
-     }
- }
+    agent any
+    environment {
+        registryUrl = "ibmpoccontainer.azurecr.io"
+        }
+        stages {
+            stage( 'Gitcheckout') {
+                steps {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], gitTool: 'Default', userRemoteConfigs: [[credentialsId: 'venky', url: 'https://github.com/venkateshmuddusetty/java-hello-world-with-gradle.git']]])
+                    
+                }
+            }
+            stage( 'Build') {
+                steps {
+                    script {
+                        // Define Variable
+                        def USER_INPUT = input(
+                            message: 'User input required - select build type?',
+                            parameters: [
+                                [$class: 'ChoiceParameterDefinition',
+                                choices: ['maven','gradle'],
+                                name: 'input',
+                                description: 'Menu - select box option']
+                                ]
+                                )
+                                echo "build type is: ${USER_INPUT}"
+                                if( "${USER_INPUT}" == "maven")
+                                sh 'mvn clean install'
+                                else( "${USER_INPUT}" == "gradle")
+                                sh './gradlew clean build'
+                                }
+                }
+            }
+            stage( 'Build docker image') {
+                steps {
+                    sh 'docker build -t helloworld:gradle .'
+                    
+                }
+                
+            }
+            stage('Upload Image to ACR') {
+                steps{
+                    sh 'docker login http://$registryUrl -u ibmpoccontainer -p U7/tPnyIHnva=iNhTVPC32kgHsCSo07P'
+                    sh 'docker tag myimage ibmpoccontainer.azurecr.io/myimage:latest'
+                    sh 'docker push ibmpoccontainer.azurecr.io/myimage:latest'
+                    
+                }
+            }
+        }
+}
