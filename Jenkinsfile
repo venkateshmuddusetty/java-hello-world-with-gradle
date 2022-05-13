@@ -27,7 +27,7 @@ pipeline {
                                 if( "${USER_INPUT}" == "maven")
                                 sh 'mvn clean install'
                                 else( "${USER_INPUT}" == "gradle")
-                                sh './gradlew clean build'
+                                sh 'gradle build'
                                 }
                 }
             }
