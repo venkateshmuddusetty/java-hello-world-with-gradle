@@ -74,8 +74,8 @@ pipeline {
                         sh 'git config --global user.email "venkat149dev@gmail.com"'
                         sh "git add ."
                         sh "git status"
-                    
-                        echo "Git committer email: ${passw}"     
+                    sh 'git commit -m  "adding the image"'
+   
                         sh "  git push https://${passw}@github.com/venkateshmuddusetty/test.git"
                       
                       
