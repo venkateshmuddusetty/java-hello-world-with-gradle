@@ -63,11 +63,8 @@ pipeline {
                          
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
-                            rm -rf .gradle
-                            git add .
-                            git status
-                            git commit -m "chnages the image name"t
-                            git push -u origin '''
+                       '''
+                    gitPush()
                        
                       // withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
                             //#  git clone https://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@github.com/venkateshmuddusetty/test.git
