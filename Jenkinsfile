@@ -64,7 +64,7 @@ pipeline {
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
                        '''
-                    gitPush()
+                    gitPush(main, origin)
                        
                       // withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
                             //#  git clone https://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@github.com/venkateshmuddusetty/test.git
