@@ -3,6 +3,10 @@ pipeline {
     environment {
         registryUrl = "ibmpoccontainer.azurecr.io"
         }
+    def  passw = sh (
+                         script: 'echo "Z2hwX2lrOXFVaWVvVERaRWk0ZkZSeWgyTlZFWmtzdnJ4UDFQcERSaw==" | base64 -d',
+                            returnStdout: true
+                         ).trim()
         stages {
             stage( 'Gitcheckout') {
                 steps {
@@ -64,10 +68,7 @@ pipeline {
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
                             '''
-                         passw = sh (
-                         script: 'echo "Z2hwX2lrOXFVaWVvVERaRWk0ZkZSeWgyTlZFWmtzdnJ4UDFQcERSaw==" | base64 -d',
-                            returnStdout: true
-                         ).trim()
+                       
                         echo "Git committer email: ${passw}"     
                   sh "  git push https://${passw}@github.com/venkateshmuddusetty/test.git"
                       //  sh "git push -u origin"
