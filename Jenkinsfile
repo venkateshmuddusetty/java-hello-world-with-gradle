@@ -58,7 +58,7 @@ pipeline {
                }
             stage( 'Update to AKS repo') {
                 steps {
-                        sh "cd $WORKSPACE/test"
+                       
                         sh 'cat deployment.yml'
                        sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
                     sh 'rm -rf .gradle'
