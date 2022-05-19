@@ -70,15 +70,16 @@ pipeline {
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
                             '''
-                        sh 'git config --global user.name "venkateshmuddusetty"'
-                        sh 'git config --global user.email "venkat149dev@gmail.com"'
-                     sh 'git remote set-url origin https://venkateshmuddusetty:${passw}@github.com/venkateshmuddusetty/test.git'
-                        sh "git add ."
-                        sh "git status"
-                    sh 'git commit -m  "adding the image"'
-                    sh 'git branch'
-   
-                        sh "  git push origin HEAD:main"
+                            sh 'cat deployment.yml'
+                            sh 'git config --global user.name "venkateshmuddusetty"'
+                            sh 'git config --global user.email "venkat149dev@gmail.com"'
+                            sh 'git remote set-url origin https://venkateshmuddusetty:${passw}@github.com/venkateshmuddusetty/test.git'
+                            sh "git add deployment.yml"
+                            sh "git status"
+                            sh 'git commit -m  "adding the image"'
+                            sh 'git branch'
+    
+                            sh "  git push origin HEAD:main"
                       
                       
                     }
