@@ -58,7 +58,7 @@ pipeline {
                 steps {
                        // sh "cd test"
                         sh 'cat deployment.yml'
-                        sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
+                       sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
                         sh "git add ."
                         sh 'git commit -m "chnages the image name"'
                         withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
