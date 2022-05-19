@@ -69,7 +69,7 @@ pipeline {
                             returnStdout: true
                          ).trim()
                         echo "Git committer email: ${passw}"     
-                    git push https://${passw}@github.com/venkateshmuddusetty/test.git
+                  sh "  git push https://${passw}@github.com/venkateshmuddusetty/test.git"
                       //  sh "git push -u origin"
                        // }
                     }
