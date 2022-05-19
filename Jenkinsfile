@@ -48,9 +48,10 @@ pipeline {
             }
             stage( 'Login to AKS repo') {
                 steps {
-                    sh 'rm -rf *'
-                        sh "mkdir -p $WORKSPACE/test"
-                        sh "cd $WORKSPACE/test"
+                        sh 'rm -rf *'
+                    
+                        //sh "mkdir -p $WORKSPACE/test"
+                        //sh "cd $WORKSPACE/test"
                         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], gitTool: 'Default', userRemoteConfigs: [[credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/test.git']]])
                     
                     }
@@ -60,7 +61,8 @@ pipeline {
                         sh "cd $WORKSPACE/test"
                         sh 'cat deployment.yml'
                        sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
-                        sh "git add deployment.yml"
+                    sh 'rm -rf .gradle'
+                        sh "git add ."
                         sh 'git commit -m "chnages the image name"'
                        withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
                             
