@@ -76,7 +76,7 @@ pipeline {
                         sh "git status"
                     
                         echo "Git committer email: ${passw}"     
-                         //sh "  git push https://${passw}@github.com/venkateshmuddusetty/test.git"
+                        sh "  git push https://${passw}@github.com/venkateshmuddusetty/test.git"
                       
                       
                     }
