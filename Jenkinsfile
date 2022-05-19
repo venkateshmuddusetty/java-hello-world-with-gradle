@@ -61,10 +61,10 @@ pipeline {
                        sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
                         sh "git add ."
                         sh 'git commit -m "chnages the image name"'
-                        withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
+                       // withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
                             
-                        sh "git push https://github.com/venkateshmuddusetty/test.git"
-                        }
+                        sh "git push https://venkateshmuddusetty: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github.com/venkateshmuddusetty/test.git"
+                        //}
                     }
                 }
             }
