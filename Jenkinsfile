@@ -62,7 +62,7 @@ pipeline {
                         sh "git add ."
                         sh 'git commit -m "chnages the image name"'
                         withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
-                        sh 'git push https://$user:$pass@venkateshmuddusetty/test.git'
+                        sh 'git push https://$user:$pass@github.com/venkateshmuddusetty/test.git'
                         }
                     }
                 }
