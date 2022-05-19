@@ -60,7 +60,7 @@ pipeline {
                 steps {
                         sh '''
                             set -e
-                            git clone https://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@github.com/venkateshmuddusetty/test.git
+                            git clone https://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@github.com/venkateshmuddusetty/test.git
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
                             rm -rf .gradle
