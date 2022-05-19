@@ -33,6 +33,7 @@ pipeline {
             }
             stage( 'Build docker image') {
                 steps {
+                    sh 'sudo chmod 777 /var/run/docker.sock'
                     sh 'docker build -t helloworld:latest .'
                     
                 }
