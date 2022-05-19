@@ -59,7 +59,7 @@ pipeline {
                         //sh "mkdir -p $WORKSPACE/test"
                         //sh "cd $WORKSPACE/test"
                         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], gitTool: 'Default', userRemoteConfigs: [[credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/test.git']]])
-                    
+                    sh "  git clone https://${passw}@github.com/venkateshmuddusetty/test.git"
                     }
                }
             stage( 'Update to AKS repo') {
@@ -70,7 +70,8 @@ pipeline {
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
                             '''
-                       
+                        sh 'git config --global user.name "venkateshmuddusetty"'
+                        sh 'git config --global user.email "venkat149dev@gmail.com"'
                         echo "Git committer email: ${passw}"     
                   sh "  git push https://${passw}@github.com/venkateshmuddusetty/test.git"
                       //  sh "git push -u origin"
