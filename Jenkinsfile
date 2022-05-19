@@ -49,17 +49,18 @@ pipeline {
             stage( 'Login to AKS repo') {
                 steps {
                         sh "mkdir -p test"
+                        sh "cd test"
                         git branch: 'main', credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/test.git'
                     
                     }
                }
             stage( 'Update to AKS repo') {
                 steps {
-                        sh "cd test"
+                       // sh "cd test"
                         sh 'cat deployment.yml'
                         sh "sed -i 's/HELLO/ibmpoccontainer.azurecr.io/helloworld:latest/g' deployment.yml"
                         sh "git add ."
-                        sh "git commit -m "chnages the image name"
+                        sh 'git commit -m "chnages the image name"'
                         withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
                         sh 'git push https://$user:$pass@venkateshmuddusetty/test.git'
                         }
