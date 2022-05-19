@@ -58,17 +58,20 @@ pipeline {
                }
             stage( 'Update to AKS repo') {
                 steps {
-                       
-                        sh 'cat deployment.yml'
-                        sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
-                        sh 'rm -rf .gradle'
-                        sh "git add ."
-                        sh "git status"
-                        sh 'git commit -m "chnages the image name"'
+                        sh '''
+                            set -e
+                            git clone https://venkateshmuddusetty:Venkatesh123^@github.com/venkateshmuddusetty/test.git
+                            cat deployment.yml
+                            sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
+                            rm -rf .gradle
+                            git add .
+                            git status
+                            git commit -m "chnages the image name"t
+                            git push -u origin '''
                        
                       // withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
                             
-                        sh "git push -u origin"
+                        //sh "git push -u origin"
                        // }
                     }
                 }
