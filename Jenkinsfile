@@ -61,8 +61,8 @@ pipeline {
                        sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
                         sh "git add ."
                         sh 'git commit -m "chnages the image name"'
-                        withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
-                        sh 'git push https://$user:$pass@github.com/venkateshmuddusetty/test.git'
+                        withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh 'git push https://$USERNAME:$PASSWORD@github.com/$PASSWORD/test.git'
                         }
                     }
                 }
