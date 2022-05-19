@@ -50,13 +50,13 @@ pipeline {
                 steps {
                         sh "mkdir -p $WORKSPACE/test"
                         sh "cd $WORKSPACE/test"
-                        git branch: 'main', credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/test.git'
+                        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], gitTool: 'Default', userRemoteConfigs: [[credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/test.git']]])
                     
                     }
                }
             stage( 'Update to AKS repo') {
                 steps {
-                       // sh "cd test"
+                        sh "cd $WORKSPACE/test"
                         sh 'cat deployment.yml'
                        sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
                         sh "git add deployment.yml"
