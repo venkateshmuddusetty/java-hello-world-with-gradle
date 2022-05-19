@@ -48,7 +48,7 @@ pipeline {
             }
             stage( 'Login to AKS repo') {
                 steps {
-                    git branch: 'dev', credentialsId: 'dev', url: 'https://github.com/Shivakumar9141/dev.git'
+                        git branch: 'main', credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/test.git'
                     }
                }
             stage( 'Update to AKS repo') {
