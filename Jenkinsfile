@@ -2,11 +2,13 @@ pipeline {
     agent any
     environment {
         registryUrl = "ibmpoccontainer.azurecr.io"
-        }
-    def  passw = sh (
+        def  passw = sh (
                          script: 'echo "Z2hwX2lrOXFVaWVvVERaRWk0ZkZSeWgyTlZFWmtzdnJ4UDFQcERSaw==" | base64 -d',
                             returnStdout: true
                          ).trim()
+        }
+    
+    
         stages {
             stage( 'Gitcheckout') {
                 steps {
