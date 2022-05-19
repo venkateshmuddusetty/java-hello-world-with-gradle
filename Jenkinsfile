@@ -75,8 +75,9 @@ pipeline {
                         sh "git add ."
                         sh "git status"
                     sh 'git commit -m  "adding the image"'
+                    sh 'git branch'
    
-                        sh "  git push https://${passw}@github.com/venkateshmuddusetty/test.git"
+                        sh "  git push -u origin"
                       
                       
                     }
