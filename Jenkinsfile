@@ -63,11 +63,13 @@ pipeline {
                          
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
-                       '''
-                    gitPush(main, origin)
-                       
-                      // withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
-                            //#  git clone https://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@github.com/venkateshmuddusetty/test.git
+                            '''
+                         passw = sh (
+                         script: 'echo "Z2hwX2lrOXFVaWVvVERaRWk0ZkZSeWgyTlZFWmtzdnJ4UDFQcERSaw==" | base64 -d',
+                            returnStdout: true
+                         ).trim()
+                        echo "Git committer email: ${passw}"     
+                    git push https://${passw}@github.com/venkateshmuddusetty/test.git
                       //  sh "git push -u origin"
                        // }
                     }
