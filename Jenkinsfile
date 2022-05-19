@@ -60,14 +60,16 @@ pipeline {
                 steps {
                        
                         sh 'cat deployment.yml'
-                       sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
-                    sh 'rm -rf .gradle'
+                        sh' sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml'
+                        sh 'rm -rf .gradle'
                         sh "git add ."
+                        sh "git status"
                         sh 'git commit -m "chnages the image name"'
-                       withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
+                       
+                      // withCredentials([gitUsernamePassword(credentialsId: 'test-tken-v', gitToolName: 'Default')]) {
                             
                         sh "git push -u origin"
-                        }
+                       // }
                     }
                 }
             }
