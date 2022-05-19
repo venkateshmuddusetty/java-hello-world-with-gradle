@@ -77,7 +77,7 @@ pipeline {
                     sh 'git commit -m  "adding the image"'
                     sh 'git branch'
    
-                        sh "  git push -u origin"
+                        sh "  git push origin HEAD:main"
                       
                       
                     }
