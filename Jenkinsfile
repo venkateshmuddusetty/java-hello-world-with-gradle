@@ -63,7 +63,6 @@ pipeline {
                             cat deployment.yml
                             sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
                             '''
-                            sh 'cat deployment.yml'
                             sh 'git config --global user.name "venkateshmuddusetty"'
                             sh 'git config --global user.email "venkat149dev@gmail.com"'
                             sh 'git remote set-url origin https://venkateshmuddusetty:${passw}@github.com/venkateshmuddusetty/test.git'
