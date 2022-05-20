@@ -19,22 +19,17 @@ pipeline {
             stage( 'Build') {
                 steps {
                     script {
-                        // Define Variable
-                        def USER_INPUT = input(
-                            message: 'User input required - select build type?',
-                            parameters: [
-                                [$class: 'ChoiceParameterDefinition',
-                                choices: ['maven','gradle'],
-                                name: 'input',
-                                description: 'Menu - select box option']
-                                ]
-                                )
-                                echo "build type is: ${USER_INPUT}"
-                                if( "${USER_INPUT}" == "maven")
-                                sh 'mvn clean install'
-                                else( "${USER_INPUT}" == "gradle")
-                                sh 'gradle build'
-                                }
+                        datas = readYaml (file : '${WORKSPACE}/config.yml')
+                        echo "build type is: ${datas.Build_tool}"
+                        if( "${datas.Build_tool}" == "maven")
+                        {
+                            sh 'mvn clean install'
+                        }
+                        else( "${datas.Build_tool}" == "gradle")
+                        {
+                            sh 'gradle build'
+                        }
+                    }
                 }
             }
             stage( 'Build docker image') {
