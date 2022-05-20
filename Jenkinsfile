@@ -67,7 +67,7 @@ pipeline {
                             sh 'git config --global user.name "venkateshmuddusetty"'
                             sh 'git config --global user.email "venkat149dev@gmail.com"'
                             sh 'git remote set-url origin https://venkateshmuddusetty:${passw}@github.com/venkateshmuddusetty/test.git'
-                            sh "git add deployment.yml"
+                            sh "git add ."
                             sh "git status"
                             sh 'git commit -m  "adding the image"'
                             sh 'git branch'
