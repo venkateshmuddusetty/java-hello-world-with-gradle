@@ -21,7 +21,7 @@ pipeline {
                     script {
                         datas = readYaml (file : 'config.yml')
                         echo "build type is: ${datas.Build_tool}"
-                        if( "${datas.Build_tool}" == "maven")
+                        if("${datas.Build_tool}" == "maven")
                         {
                             sh 'mvn clean install'
                         }
