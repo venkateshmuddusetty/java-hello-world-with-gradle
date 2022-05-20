@@ -19,7 +19,7 @@ pipeline {
             stage( 'Build') {
                 steps {
                     script {
-                        datas = readYaml (file : '${WORKSPACE}/config.yml')
+                        datas = readYaml (file : 'config.yml')
                         echo "build type is: ${datas.Build_tool}"
                         if( "${datas.Build_tool}" == "maven")
                         {
