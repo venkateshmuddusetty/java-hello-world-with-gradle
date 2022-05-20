@@ -12,7 +12,7 @@ pipeline {
         stages {
           stage( 'Gitcheckout') {
                 steps {
-                  //  checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/java-hello-world-with-gradle.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/java-hello-world-with-gradle.git']]])
                     echo "test"
                 }
             }  
@@ -23,12 +23,12 @@ pipeline {
                         echo "build type is: ${datas.Build_tool}"
                         
                         
-                        if( "${datas.Build_tool}" == "maven" ) {
-                            sh 'mvn clean install'
-                        }
-                        else( "${datas.Build_tool}" == "gradle" ) {
+                        if( "${datas.Build_tool}" == "maven" ) 
+                        sh 'mvn clean install'
+                        
+                        else( "${datas.Build_tool}" == "gradle" ) 
                             sh 'gradle build'
-                        }
+                        
                     }
                 }
             }
