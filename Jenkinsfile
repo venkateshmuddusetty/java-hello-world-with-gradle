@@ -9,13 +9,13 @@ pipeline {
         }
     
     
-        stages {
+     /*   stages {
             stage( 'Gitcheckout') {
                 steps {
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], gitTool: 'Default', userRemoteConfigs: [[credentialsId: 'test-tken-v', url: 'https://github.com/venkateshmuddusetty/java-hello-world-with-gradle.git']]])
                     
                 }
-            }
+            }  */
             stage( 'Build') {
                 steps {
                     script {
