@@ -41,7 +41,9 @@ pipeline {
             }
             stage('Upload Image to ACR') {
                 steps{
-                    sh 'docker login http://$registryUrl -u hidpdeveastusbotacr --password-stdin 8//cqpalTQ5+R2voayyRRDPsiBZ6eIaY'
+                    sh '''
+                        docker login -u hidpdeveastusbotacr --password-stdin 8//cqpalTQ5+R2voayyRRDPsiBZ6eIaY http://$registryUrl
+                        '''
                     sh 'docker tag myimage hidpdeveastusbotacr.azurecr.io/myimage:latest'
                     sh 'docker push hidpdeveastusbotacr.azurecr.io/myimage:latest'
                     
