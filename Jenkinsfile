@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registryUrl = "ibmpoccontainer.azurecr.io"
+        registryUrl = "hidpdeveastusbotacr.azurecr.io"
         def passw = sh (
                          script: 'echo "Z2hwX2lrOXFVaWVvVERaRWk0ZkZSeWgyTlZFWmtzdnJ4UDFQcERSaw==" | base64 -d',
                             returnStdout: true
@@ -42,10 +42,10 @@ pipeline {
             stage('Upload Image to ACR') {
                 steps{
                     sh '''
-                        docker login -u hidpdeveastusbotacr --password-stdin 8//cqpalTQ5+R2voayyRRDPsiBZ6eIaY http://$registryUrl
+                        docker login $registryUrl -u hidpdeveastusbotacr -p +EaOLpFAd9ks5vrkfWBilFcJPoBQnKgT
                         '''
-                    sh 'docker tag myimage hidpdeveastusbotacr.azurecr.io/myimage:latest'
-                    sh 'docker push hidpdeveastusbotacr.azurecr.io/myimage:latest'
+                    sh 'docker tag myimage $registryUrl/hello:latest'
+                    sh 'docker push $registryUrl/hello:latest'
                     
                 }
             }
@@ -65,7 +65,7 @@ pipeline {
                             set -e
                          
                             cat deployment.yml
-                            sed -e "s|HELLO|ibmpoccontainer.azurecr.io/helloworld:latest|g" deployment.yml
+                            sed -e "s|HELLO|$registryUrl/hello:latest|g" deployment.yml
                             '''
                             sh 'git config --global user.name "venkateshmuddusetty"'
                             sh 'git config --global user.email "venkat149dev@gmail.com"'
