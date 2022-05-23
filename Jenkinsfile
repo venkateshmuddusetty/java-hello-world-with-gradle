@@ -34,7 +34,7 @@ pipeline {
             }
             stage( 'Build docker image') {
                 steps {
-                    sh 'docker build -t helloworld:latest .'
+                    sh 'docker build -t hello:latest .'
                     
                 }
                 
@@ -44,7 +44,7 @@ pipeline {
                     sh '''
                         docker login $registryUrl -u hidpdeveastusbotacr -p +EaOLpFAd9ks5vrkfWBilFcJPoBQnKgT
                         '''
-                    sh 'docker tag myimage $registryUrl/hello:latest'
+                    sh 'docker tag  hello:latest $registryUrl/hello:latest'
                     sh 'docker push $registryUrl/hello:latest'
                     
                 }
