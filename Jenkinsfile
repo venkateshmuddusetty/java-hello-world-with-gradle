@@ -24,10 +24,14 @@ pipeline {
                         
                         
                         if( "${datas.Build_tool}" == "maven" ) 
+                        {
                         sh 'mvn clean install'
+                        }
                         
                         else( "${datas.Build_tool}" == "gradle" ) 
-                            sh 'gradle build'
+                        {  
+                        sh 'gradle build'
+                        }
                         
                     }
                 }
